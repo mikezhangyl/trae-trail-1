@@ -29,6 +29,18 @@ body {
   padding: 20px;
 }
 
+/* 抖动动画 */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+}
+
+.shake {
+  animation: shake 0.3s ease-in-out;
+}
+
 .login-form,
 .register-form {
   background: white;
@@ -82,26 +94,52 @@ body {
 
 .login-button,
 .register-button {
-  width: 100%;
-  padding: 15px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
   border: none;
-  border-radius: 10px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  padding: 15px;
+  border-radius: 12px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  width: 100%;
 }
 
-.login-button:hover,
-.register-button:hover {
+.login-button:hover:not(:disabled),
+.register-button:hover:not(:disabled) {
   transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
 }
 
-.login-button:active,
-.register-button:active {
-  transform: translateY(0);
+.login-button:disabled,
+.register-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+/* 加载动画 */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 0.8s linear infinite;
+}
+
+.login-button:disabled .loading-spinner,
+.register-button:disabled .loading-spinner {
+  border-top-color: rgba(255, 255, 255, 0.7);
 }
 
 .register-link,
@@ -123,12 +161,12 @@ body {
 }
 
 .error-message {
-  background-color: #ffebee;
-  color: #d32f2f;
-  padding: 10px 15px;
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
   border-radius: 8px;
-  margin-bottom: 20px;
-  font-size: 14px;
+  margin-bottom: 15px;
+  text-align: center;
 }
 
 .success-message {
